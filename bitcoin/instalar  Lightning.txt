@@ -1,0 +1,165 @@
+
+1- verificar los logs no
+	sudo tail -f /var/lib/bitcoind/testnet3/debug.log
+	
+2- crear una carpeta proyecto y entrar en ella
+	mkdir proyecto
+	
+2.5 instalar git 
+	sudo apt-get install git
+	
+3- clonar el repositorio siguiente https://github.com/ElementsProject/lightning.git
+	sudo git clone 
+
+4- indicaciones de instalacion 
+
+https://github.com/ElementsProject/lightning/blob/master/doc/getting-started/getting-started/installation.md
+
+sudo apt-get update
+
+sudo apt-get install -y \
+  jq autoconf automake build-essential git libtool libsqlite3-dev libffi-dev \
+  python3 python3-pip net-tools zlib1g-dev libsodium-dev gettext
+
+pip3 install --upgrade pip  - no me funciono
+pip3 install --user poetry
+
+- me funciono
+pip3 install --upgrade pip --break-system-packages  
+pip3 install --user poetry --break-system-packages
+
+
+-- no funciono
+pip3 install mako
+
+-- se ejecuto
+pip3 install mako --break-system-packages
+devolvio : requirement already satisfied : mako in /usr/lib/python3/dist-packages (1.3.2.dev0)
+
+-- no funciona
+pip3 install grpcio-tools 
+
+pip3 install grpcio-tools --break-system-packages
+
+-- estar adentro del proyecto
+sudo ./configure
+sudo make -j$(nproc) -en este dio unos errores grpc_tools not found
+sudo make install
+ 
+ 
+5- descargar el service ubicado
+ https://github.com/ElementsProject/lightning/blob/master/contrib/init/lightningd.service
+ 
+ 
+ ubicarse en descargas
+	sudo cp lightningd.service /etc/systemd/system
+	
+6- modificar el archivo
+	sudo nano /etc/systemd/system/lightningd.service
+	cambiar linea ExecStart por /usr/local/bin/lightningd
+
+7- reiniciar demon
+	sudo systemctl daemon-reload
+	
+8- verificar que este cargado
+	sudo systemctl status lightningd.service
+	
+9- lightningd -h
+	
+	
+10- probar conexion de nuevo rpc
+	sudo bitcoin-cli -datadir=/var/lib/bitcoind -testnet -getinfo
+	
+-- hasta aqui funciono
+	
+11-crear el directorio para la red 
+	sudo mkdir /etc/lightningd
+	
+12- crear el archivo de conf para la red
+	sudo nano /etc/lightningd/lightningd.conf
+	
+	y agregar la siguiente linea
+	network=testnet
+	bitcoin-datadir=/var/lib/bitcoind
+	alias=TestNode
+	lightning-dir=/var/lib/lightningd
+	log-file=/var/lib/lightningd/log
+	
+13- sudo mkdir -v /var/lib/lightningd
+	sudo chown -R bitcoin:bitcoin /var/lib/lightningd
+	
+14- ejecutar 
+
+	sudo systemctl start lightningd
+	
+15- installar tor
+	sudo apt install tor
+	
+16- que este habilitado desde ya tor y como servicio de inicio
+	sudo systemctl enable --now tor
+	
+17- verificar que este activo
+	systemctl status tor
+	
+18- activar como servicio de inicio bitcoin y lightningd (si aun no lo han hecho)
+	sudo systemctl enable bitcoind
+	sudo systemctl enable lightningd
+	
+19- colocar como requerido el servicio tor en lightningd service
+	
+	sudo nano /etc/systemd/system/lightningd.service
+	
+	modificar linea de requires agregando al final tor.service
+	modificar linea de after agregando al final tor.services
+	
+20- ejecutar las siguientes lineas
+	sudo systemctl daemon-reload
+	sudo systemctl restart tor
+	sudo systemctl restart lightningd
+	
+21- modificar el arhivo conf de tor
+	sudo nano /etc/tor/torrc
+	
+	habilitar la linea 
+	ExitPolicy reject *:* # no exits allowed
+	
+	agregar al final
+	ControlPort 9051
+	CookieAuthentication 1
+	CookieAuthFile /var/lib/tor/control_auth_cookie
+	CookieAuthFileGroupReadable 1
+	
+	reiniciar
+	sudo systemctl restart tor
+	
+22- ejecutamos el siguiente comando para saber los grupos
+	getent group | cut -d: -f1 | sort
+	
+23- agregamos los grupos para que los maneje el tor
+	sudo usermod -a -G debian-tor bitcoin
+	
+	reiniciar tor y lightningd
+	
+24- agregar la siguiente linea al servicio de lightningd
+	sudo nano /etc/lightningd/lightningd.conf
+	
+	reiniciar lightningd en caso de error reiniciar maquina virtual
+	
+25- te saldra un error de permision denied de una cookie modificar
+	modificar el arhivo conf de tor
+	sudo nano /etc/tor/torrc
+	
+	agregar
+	DataDirectoryGroupReadable 1
+	
+	reiniciar tor y luego lightningd
+	
+26- probar conexion
+	sudo ligtning-cli --testnet --ligtning-dir=/var/lib/lightningd help
+	
+	tiene que salir el menu de help
+	
+	
+
+	
+	

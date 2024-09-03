@@ -1,0 +1,57 @@
+
+-- ordenando pasos para instalar bitcoind core
+
+1- primero descomprimimos
+	tar xvf versionB
+	
+2-copiamos los archivos
+	sudo cp -Rv versionb/{bin,include,share} /usr
+	
+3- verificamos que responda la siguiente instruccion
+	bitcoind -h
+	
+4- descargar el bitcoind.service de https://github.com/bitcoin/bitcoin/tree/master/contrib/init
+
+5- copiamos el bitcoind service
+	sudo cp -v bitcoind.service /etc/systemd/system
+	
+6 - reiniciamos los servicios
+	sudo systemctl daemon-reload
+	
+7- creando usuario bitcoind necesario
+	sudo useradd -r bitcoin
+	
+8- creando carpeta bitcoind en etc (verificar si ya existe omitir paso)
+	sudo mkdir /etc/bitcoin
+	
+9- copiamos el archivo conf
+	sudo cp -v bitcoin-27.0/bitcoin.conf /etc/bitcoin/
+	
+
+10- abrir conf modificar 
+	sudo nano /etc/bitcoin/bitcoin.conf
+	
+	opcion prune 550 para no descargar todo el blockchain 
+	
+	y en rpc option colocar rest=1
+	
+	y en testnet = 1
+	
+11- levantar el servicio
+	sudo systemctl start bitcoind
+	
+12- probar rpc actions
+	sudo bitcoin-cli -datadir=/var/lib/bitcoind -testnet -getinfo
+
+13-- añadiendo al boot de inicio opcional
+ sudo systemctl enable bitcoind
+ 
+ 
+ 
+ 
+ 
+-- viendo los logs en caso de fallar
+ sudo journalctl -eu bitcoind
+ 
+-- logs completos
+sudo less /var/lib/bitcoind/debug.log 

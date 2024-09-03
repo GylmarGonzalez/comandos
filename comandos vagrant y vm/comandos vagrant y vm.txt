@@ -1,0 +1,30 @@
+-- usuario vagrant clave vagrant
+
+-- comando para levantar una maquina virtual configurada desde archivo
+vagrant up
+
+--comando para entrar en la maquina virtual desde consola ssh
+vagrant ssh
+
+-- configurando PostgreSQL cambiando clave de usuario por defecto
+	 sudo -i -u postgres
+		psql
+		\password postgres
+		-- clave ingresada 123456789
+
+-- creando la base de datos por defecto videojuegos
+	CREATE DATABASE videojuegos;
+	\q
+	
+-- modificando los archivos para poder conectarse por medio de IP fuera
+-- de la vm en su version 15
+
+	-- listen_addresses = '*'
+	nano /etc/postgresql/15/main/postgresql.conf
+
+	-- agregar la siguiente linea
+    --	host    all             all             192.168.56.1/0          trust
+	nano /etc/postgresql/15/main/pg_hba.conf
+	
+-- reiniciar el server
+
