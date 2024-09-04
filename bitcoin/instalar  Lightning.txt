@@ -158,7 +158,7 @@ sudo make install
 	reiniciar tor y luego lightningd
 	
 26- probar conexion
-	sudo ligtning-cli --testnet --ligtning-dir=/var/lib/lightningd help
+	sudo lightning-cli --testnet --lightning-dir=/var/lib/lightningd help
 	
 	tiene que salir el menu de help
 	
