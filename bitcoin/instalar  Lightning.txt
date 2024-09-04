@@ -70,8 +70,6 @@ sudo make install
 10- probar conexion de nuevo rpc
 	sudo bitcoin-cli -datadir=/var/lib/bitcoind -testnet -getinfo
 	
--- hasta aqui funciono
-	
 11-crear el directorio para la red 
 	sudo mkdir /etc/lightningd
 	
@@ -143,6 +141,11 @@ sudo make install
 24- agregar la siguiente linea al servicio de lightningd
 	sudo nano /etc/lightningd/lightningd.conf
 	
+	proxy=127.0.0.1:9050
+	bind-addr=127.0.0.1:9735
+	addr=statictor:127.0.0.1:9051
+	always-use-proxy=true
+	
 	reiniciar lightningd en caso de error reiniciar maquina virtual
 	
 25- te saldra un error de permision denied de una cookie modificar
@@ -159,6 +162,9 @@ sudo make install
 	
 	tiene que salir el menu de help
 	
+	
+	recurso de instalacion de tor
+https://github.com/ElementsProject/lightning/blob/master/doc/getting-started/advanced-setup/tor.md
 	
 
 	
