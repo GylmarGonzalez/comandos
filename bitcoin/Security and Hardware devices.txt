@@ -1,0 +1,48 @@
+-- no terminado
+
+1- descargar specter
+
+2- descomprimir specter
+	tar xvf specter ....
+
+2.5 sudo apt-get install fuse libfuse2
+
+2.6 desactivar restricciones si usas ubunto version 20 para arriba
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+	
+3- ejecutando specter
+	./Specterversion.AppImage
+	
+4- bitcoin core conection
+
+5- obtener usuario y clave para conexion pero cambia cada vez que se ejecutar el servicio
+	sudo cat /var/lib/bitcoind/testnet3/.cookie
+	
+	modificar conf de bitcoin
+		sudo nano /etc/bitcoin/bitcoin.conf
+	agregar lo siguiente
+		rpcuser=testuser
+		rpcpassword=testpassword
+		
+	modificar conf de lightningd
+		sudo nano /etc/lightningd/lightningd.conf
+	quitar la linea
+		bitcoin-datadir
+	agregar lo siguiente
+		bitcoin-rpcuser=testuser
+		bitcoin-rpcpassword=testpassword
+		bitcoin-rpcconnect=127.0.0.1
+		bitcoin-rpcport=18332
+	
+	reiniciar bitcoin  tor  lightningd (este ultimo no levanta segun video )
+	
+	probar el bitcoin con usuario y clave estatico
+		sudo bitcoin-cli -rpcuser=testuser -rpcpassword=testpassword -testnet -getinfo
+		
+		
+6-	minuto 17:56 al 36.40 prueba la app sobre el nodo de bitcoind pasos visuales
+
+	no funciona lo del usb asi como le aparece en el video de rapido
+	
+
+7- 53.32
