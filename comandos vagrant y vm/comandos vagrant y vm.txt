@@ -1,3 +1,10 @@
+-- sudo apt install openssh-server
+-- sudo systemctl enable --now ssh
+-- sudo systemctl status ssh
+
+
+
+
 -- usuario vagrant clave vagrant
 
 -- comando para levantar una maquina virtual configurada desde archivo

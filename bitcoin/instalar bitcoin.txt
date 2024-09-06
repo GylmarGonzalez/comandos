@@ -1,6 +1,12 @@
 
 -- ordenando pasos para instalar bitcoind core
 
+si se usan desde ssh algunos comandos necesitas ser sudo antes del comandos
+en dado caso den error de permiso denegado
+
+ descargar desde consola 
+ sudo curl -O https://bitcoin.org/bin/bitcoin-core-27.0/bitcoin-27.0-x86_64-linux-gnu.tar.gz
+
 1- primero descomprimimos
 	tar xvf versionB
 	
@@ -10,7 +16,9 @@
 3- verificamos que responda la siguiente instruccion
 	bitcoind -h
 	
-4- descargar el bitcoind.service de https://github.com/bitcoin/bitcoin/tree/master/contrib/init
+4- descargar el bitcoind.service 
+	sudo curl -OL https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/init/bitcoind.service
+	
 
 5- copiamos el bitcoind service
 	sudo cp -v bitcoind.service /etc/systemd/system

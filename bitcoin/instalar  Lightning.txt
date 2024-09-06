@@ -3,13 +3,13 @@
 	sudo tail -f /var/lib/bitcoind/testnet3/debug.log
 	
 2- crear una carpeta proyecto y entrar en ella
-	mkdir proyecto
+	sudo mkdir proyecto
 	
 2.5 instalar git 
 	sudo apt-get install git
 	
 3- clonar el repositorio siguiente https://github.com/ElementsProject/lightning.git
-	sudo git clone 
+	sudo git clone https://github.com/ElementsProject/lightning.git
 
 4- indicaciones de instalacion 
 
@@ -50,6 +50,7 @@ sudo make install
 5- descargar el service ubicado
  https://github.com/ElementsProject/lightning/blob/master/contrib/init/lightningd.service
  
+ sudo curl -OL https://raw.githubusercontent.com/ElementsProject/lightning/master/contrib/init/lightningd.service
  
  ubicarse en descargas
 	sudo cp lightningd.service /etc/systemd/system
@@ -65,6 +66,7 @@ sudo make install
 	sudo systemctl status lightningd.service
 	
 9- lightningd -h
+
 	
 	
 10- probar conexion de nuevo rpc
@@ -89,6 +91,10 @@ sudo make install
 14- ejecutar 
 
 	sudo systemctl start lightningd
+	
+		sudo journalctl -eu lightningd
+		
+		sudo less /var/lib/lightningd/log
 	
 15- installar tor
 	sudo apt install tor
