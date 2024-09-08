@@ -26,13 +26,10 @@ Practica del tercer video
 	 sudo curl -O https://github.com/cryptoadvance/specter-desktop/releases/download/v2.0.5/specter_desktop-v2.0.5-x86_64-linux-gnu.tar.gz
 
 2- descomprimir specter
-	tar xvf specter ....
+	tar xzvf specter ....
 
 2.5 sudo apt-get install fuse libfuse2
 
-2.6 desactivar restricciones si usas ubunto version 20 para arriba
-sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-	
 3- ejecutando specter
 	./Specterversion.AppImage
 	
@@ -67,7 +64,5 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 		
 6-	minuto 17:56 al 36.40 prueba la app sobre el nodo de bitcoind pasos visuales
 
-	no funciona lo del usb asi como le aparece en el video de rapido
 	
-
 7- 53.32
