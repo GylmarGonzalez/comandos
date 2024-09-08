@@ -18,8 +18,12 @@ instalando emulador de ledger documentacion https://speculos.ledger.com/
 	./speculos.py apps/btc.elf --model nanos
 
  5- http://127.0.0.1:5000
+
+
+Practica del tercer video
 	
 1- descargar specter
+	 sudo curl -O https://github.com/cryptoadvance/specter-desktop/releases/download/v2.0.5/specter_desktop-v2.0.5-x86_64-linux-gnu.tar.gz
 
 2- descomprimir specter
 	tar xvf specter ....
