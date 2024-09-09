@@ -65,4 +65,22 @@ Practica del tercer video
 6-	minuto 17:56 al 36.40 prueba la app sobre el nodo de bitcoind pasos visuales
 
 	
-7- 53.32
+7- 53.32 comienza la segunda parte
+
+probar 	
+	sudo -u bitcoin bitcoin-cli -datadir=/var/lib/bitcoind/testnet3 -testnet 
+	    -rpcuser=testuser -rpcpassword=testpassword -getinfo
+
+	quitar bitcoind service solo dejar tor en requires and after
+		sudo nano /etc/systemd/system/lightningd.service
+
+ test
+	lightning conf
+	bitcoin-cli=/usr/bin/bitcoin-cli
+	
+8- ejecutar informacion del nodo
+	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd getinfo
+	
+9- obtener la direccion para obtener fondos
+		sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd newaddr
+	
