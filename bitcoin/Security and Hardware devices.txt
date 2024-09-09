@@ -87,6 +87,8 @@ Practica del tercer video
 		sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd newaddr
 	
 10 minuto 1.10 1.18 se realizan unos pasos visuales desde la wallet y el emulador para hacer una trx
+
+	primer problema no aparece la transaccion en el mempool
    
    se trata de abrir un canal con 
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfunds
