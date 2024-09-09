@@ -67,16 +67,18 @@ Practica del tercer video
 	
 7- 53.32 comienza la segunda parte
 
-probar 	
-	sudo -u bitcoin bitcoin-cli -datadir=/var/lib/bitcoind/testnet3 -testnet 
-	    -rpcuser=testuser -rpcpassword=testpassword -getinfo
-
 	quitar bitcoind service solo dejar tor en requires and after
 		sudo nano /etc/systemd/system/lightningd.service
+		
+		sudo systemctl daemon-reload
+		sudo systemctl restart tor
+		sudo systemctl restart lightningd
 
- test
-	lightning conf
+	agregar al conf de lightning
 	bitcoin-cli=/usr/bin/bitcoin-cli
+	
+	probando puertos de escucha cuando reinicia
+  nc -l -p 18332
 	
 8- ejecutar informacion del nodo
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd getinfo
