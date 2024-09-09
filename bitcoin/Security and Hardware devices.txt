@@ -89,7 +89,7 @@ Practica del tercer video
 10 minuto 1.10 1.18 se realizan unos pasos visuales desde la wallet y el emulador para hacer una trx
    
    se trata de abrir un canal con 
-	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfounds
+	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfunds
 	
    conecta 
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd connect 
