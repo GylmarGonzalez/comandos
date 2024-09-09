@@ -77,8 +77,8 @@ Practica del tercer video
 	agregar al conf de lightning
 	bitcoin-cli=/usr/bin/bitcoin-cli
 	
-	probando puertos de escucha cuando reinicia
-  nc -l -p 18332
+	probando puertos de escucha cuando reinicia opcional
+    nc -l -p 18332
 	
 8- ejecutar informacion del nodo
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd getinfo
@@ -86,3 +86,12 @@ Practica del tercer video
 9- obtener la direccion para obtener fondos
 		sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd newaddr
 	
+10 minuto 1.10 1.18 se realizan unos pasos visuales desde la wallet y el emulador para hacer una trx
+   
+   se trata de abrir un canal con 
+	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfounds
+	
+   conecta 
+	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd connect 
+	
+	pero nunca responde
