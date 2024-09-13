@@ -87,7 +87,7 @@ Practica del tercer video
 	
 	sudo ufw allow 18332
 	
-	netsat -tulpn | grep 18332
+	netstat -tulpn | grep 18332
 	
 8- ejecutar informacion del nodo
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd getinfo
