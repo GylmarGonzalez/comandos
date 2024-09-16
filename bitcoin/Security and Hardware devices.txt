@@ -33,7 +33,7 @@ Practica del tercer video
 3- ejecutando specter
 	./Specterversion.AppImage
 	
-4- bitcoin core conection
+4- bitcoin core conection (no entrar aun solo dejar cargado Specter)
 
 5- obtener usuario y clave para conexion pero cambia cada vez que se ejecutar el servicio
 	sudo cat /var/lib/bitcoind/testnet3/.cookie
@@ -74,13 +74,16 @@ Practica del tercer video
 	quitar bitcoind service solo dejar tor en requires and after
 		sudo nano /etc/systemd/system/lightningd.service
 		
+		agregar al conf de lightning sudo nano /etc/lightningd/lightningd.conf
+	     bitcoin-cli=/usr/bin/bitcoin-cli
+
+		realizar
 		sudo systemctl daemon-reload
 		sudo systemctl restart bitcoind
 		sudo systemctl restart tor
 		sudo systemctl restart lightningd
 
-	agregar al conf de lightning
-	bitcoin-cli=/usr/bin/bitcoin-cli
+
 	
 	probando puertos de escucha
     nc -l -p 18332 -- already in user-static
@@ -97,14 +100,20 @@ Practica del tercer video
 	
 10 minuto 1.10 1.18 se realizan unos pasos visuales desde la wallet y el emulador para hacer una trx
 
-	realiza una trx de 3123
+	realiza una trx seguir los pasos del video desde specter hasta finalizar 
+	en el emulador
 	
-	primer problema no aparece la transaccion en el mempool
+	luego copiar el id de la transaccion y buscarlo en meepool recordar usar testnet
+	
+	saldra la trasaccion y a los minutos se nos confirmara
    
    se trata de abrir un canal con 
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfunds
 	
-   conecta 
+   conecta con out
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd connect 
 	
-	pero nunca responde
+   
+   sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd fundchannel
+   idgeneradoENConnect all
+   
