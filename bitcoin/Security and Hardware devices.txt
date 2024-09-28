@@ -33,7 +33,7 @@ Practica del tercer video
 3- ejecutando specter
 	./Specterversion.AppImage
 	
-4- bitcoin core conection
+4- bitcoin core conection (no entrar aun solo dejar cargado Specter)
 
 5- obtener usuario y clave para conexion pero cambia cada vez que se ejecutar el servicio
 	sudo cat /var/lib/bitcoind/testnet3/.cookie
@@ -59,10 +59,14 @@ Practica del tercer video
 	probar el bitcoin con usuario y clave estatico
 		sudo bitcoin-cli -rpcuser=testuser -rpcpassword=testpassword -testnet -getinfo
 		
-
-
-		
+	
 6-	minuto 17:56 al 36.40 prueba la app sobre el nodo de bitcoind pasos visuales
+		- se realiza un envio de dinero desde la web,  https://coinfaucet.eu/en/btc-testnet/
+		  cada 24 horas se puede hacer un envio
+		
+		- luego hay que esperar mas de 4 confirmaciones en https://mempool.space/es/testnet
+		  se copia la direccion donde caeran los fondos luego de esas confirmaciones
+		  podemos ver los satoschis en nuestra waller y la trx
 
 	
 7- 53.32 comienza la segunda parte
@@ -70,15 +74,23 @@ Practica del tercer video
 	quitar bitcoind service solo dejar tor en requires and after
 		sudo nano /etc/systemd/system/lightningd.service
 		
+		agregar al conf de lightning sudo nano /etc/lightningd/lightningd.conf
+	     bitcoin-cli=/usr/bin/bitcoin-cli
+
+		realizar
 		sudo systemctl daemon-reload
+		sudo systemctl restart bitcoind
 		sudo systemctl restart tor
 		sudo systemctl restart lightningd
 
-	agregar al conf de lightning
-	bitcoin-cli=/usr/bin/bitcoin-cli
+
 	
-	probando puertos de escucha cuando reinicia opcional
-    nc -l -p 18332
+	probando puertos de escucha
+    nc -l -p 18332 -- already in user-static
+	
+	sudo ufw allow 18332
+	
+	netstat -tulpn | grep 18332
 	
 8- ejecutar informacion del nodo
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd getinfo
@@ -88,12 +100,20 @@ Practica del tercer video
 	
 10 minuto 1.10 1.18 se realizan unos pasos visuales desde la wallet y el emulador para hacer una trx
 
-	primer problema no aparece la transaccion en el mempool
+	realiza una trx seguir los pasos del video desde specter hasta finalizar 
+	en el emulador
+	
+	luego copiar el id de la transaccion y buscarlo en meepool recordar usar testnet
+	
+	saldra la trasaccion y a los minutos se nos confirmara
    
    se trata de abrir un canal con 
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd listfunds
 	
-   conecta 
+   conecta con out
 	sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd connect 
 	
-	pero nunca responde
+   
+   sudo -u bitcoin lightning-cli --testnet --lightning-dir=/var/lib/lightningd fundchannel
+   idgeneradoENConnect all
+   
